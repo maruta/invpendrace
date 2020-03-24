@@ -1,0 +1,26 @@
+html,body,#screen{
+    width:100vw;
+    height:100vh;
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+#screen{
+    background: black;
+}
+
+@font-face {
+	font-family: 'Play';
+	src: url(./fonts/Play/Play-Regular.ttf);
+}
+
+#hud{
+    position: fixed;
+    left:0;
+    bottom:0;
+    width:100vw;
+    color: rgba(0,255,255,0.5);
+    font-family: 'Consolas', monospace;
+    white-space: pre;
+}
