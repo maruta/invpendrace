@@ -54,7 +54,7 @@ X = zeros(nx,1000*60)*nan;
 step = 1;
 t=0;
 
-mode = 'init';
+mode = "init";
 
 recordMovie = false; % 動画を作るときは false を true に
 
@@ -81,42 +81,42 @@ while true
     
     % モード遷移則
     switch mode
-        case 'init'
+        case "init"
             ref = x(1);
             if t>3
-                mode = 'run';
+                mode = "run";
                 jumped_1 = false;
                 jumped_2 = false;
             end
-        case 'run'
-            if x(1)>48.5 && jumped_1 == false
-                mode = 'jump';
+        case "run"
+            if x(1) > 48.5 && jumped_1 == false
+                mode = "jump";
                 jumped_1 = true;
                 tj = t;
             end
-            if x(1)>82.5 && jumped_2 == false
-                mode = 'jump';
+            if x(1) > 82.5 && jumped_2 == false
+                mode = "jump";
                 jumped_2 = true;
                 tj = t;
             end
             if x(1) > 165
-                mode = 'end';
+                mode = "end";
                 te = t;
             end
-        case 'jump'
-            if t-tj>1/4
-                mode = 'run';
+        case "jump"
+            if t - tj > 1/4
+                mode = "run";
             end
-        case 'end'
+        case "end"
             if t-te>5
-                mode = 'exit';
+                mode = "exit";
             end
     end
     
     
     % 制御則
     
-    if strcmp(mode,'run') || strcmp(mode,'jump')
+    if mode == "run" || mode == "jump"
         v = 5;
     else
         v = 0;
@@ -126,7 +126,7 @@ while true
     x(5) = x(5)-v;
     ref = ref+v*dt;
     
-    if strcmp(mode,'jump')
+    if mode == "jump"
         x(2) = x(2) - 0.5*abs(sin((t-tj)*pi*4));
         x(6) = x(6) - 0.5*sign(sin((t-tj)*pi*4))*cos((t-tj)*pi*1)*pi*4;
     end
@@ -144,14 +144,15 @@ while true
     U(:,step) = u;
     
     % デバッグ用にシミュレータに表示することもできる
-    if strcmp(mode,'init')
-        info = 'いっきま～す！';
-    elseif strcmp(mode, 'jump')
-        info = 'そいや！';
-    elseif strcmp(mode, 'end')
-        info = 'やれやれだぜ・・・';
-    else
-        info = '';
+    switch mode
+        case "init"
+            info = "いっきま～す！";
+        case "jump"
+            info = "そいや！";
+        case "end"
+            info = "やれやれだぜ・・・";
+        otherwise
+            info = "";
     end
     
     state = rs.control(id,u,info);
@@ -166,7 +167,7 @@ while true
         pause(dt-rdt)
     end
     
-    if strcmp(mode,'exit')
+    if mode == "exit"
         break
     end
     t=t+dt;
