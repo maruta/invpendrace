@@ -29,6 +29,9 @@ npm install
 npm run start
 ```
 
+デバッグ用の Developer Tool がドックインされていて画面が狭いので
+別ウィンドウに出した方が良い．
+
 ### ファイル構成
 
 <dl>
