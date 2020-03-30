@@ -1,6 +1,7 @@
 # 新入生実験用の倒立振子シミュレータ
 
-Ascento や Handle っぽい脚の先端が車輪になっているタイプの倒立振子のシミュレータ．
+[Ascento](https://www.ascento.ethz.ch/) や [Handle](https://www.bostondynamics.com/handle) っぽい脚の先端が車輪になっているタイプの倒立振子のシミュレータ．
+新入生実験用にかなり理想化二次元空間での動作に限定した簡易版．
 Electron を使っているので Windows/Mac/Linux に対応．
 制御器との接続は HTTP なので大抵の言語で制御器を書くことができる．
 
