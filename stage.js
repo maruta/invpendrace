@@ -2,7 +2,7 @@ const { World, Edge, Vec2, Circle, Box, RevoluteJoint } = require('planck-js')
 
 const { StageFactory } = require('./stage-utils')
 
-const populateWorld = (world) => {
+const populateWorld = (world, version, port) => {
   world.t = 0
 
   const SF = new StageFactory(world)
@@ -11,7 +11,9 @@ const populateWorld = (world) => {
   SF.beginFloor()
   SF.putText(3, 5,
     `Inverted Pendulum Simulator
-Version ${process.env.npm_package_version}
+version ${version} 
+
+listening on port ${port}
 
 ルール：
 ・車輪以外が地面についたらアウト

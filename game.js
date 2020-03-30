@@ -210,43 +210,8 @@ let robots
 let robotCounter
 let viewpoint
 
-function reset () {
-  robots = new Map()
-  world = new World(Vec2(0, -9.8))
-  world.robots = robots
-  latestRobot = undefined
-  renderer = new Renderer(world, ctx)
-  robotCounter = 0
-  viewpoint = Vec2(0, 0)
-  populateWorld(world)
-}
-
-reset()
-
-function updateScreen () {
-  if (latestRobot) {
-    const pos = latestRobot.body.getPosition()
-    if (Math.abs(viewpoint.x - pos.x) > 2) {
-      viewpoint.x = viewpoint.x > pos.x ? pos.x + 2 : pos.x - 2
-    }
-    if (Math.abs(viewpoint.y - pos.y) > 1) {
-      viewpoint.y = viewpoint.y > pos.y ? pos.y + 1 : pos.y - 1
-    }
-    const r = latestRobot
-    const b = r.body.getPosition(); const ba = r.body.getAngle()
-    const w = Vec2.sub(r.wheel.getPosition(), b); const wa = r.wheel.getAngle()
-    const hud = `
-body: (${b.x.toFixed(2).padStart(5, ' ')}, ${b.y.toFixed(2).padStart(5, ' ')}, ${ba.toFixed(2).padStart(5, ' ')}), wheel: (${w.x.toFixed(2).padStart(5, ' ')}, ${w.y.toFixed(2).padStart(5, ' ')}, ${wa.toFixed(2).padStart(5, ' ')}), numLandContacts = ${r.numLandContacts}
-torque: (${r.torque[0].toFixed(2).padStart(6, ' ')}, ${r.torque[1].toFixed(2).padStart(6, ' ')}, ${r.torque[2].toFixed(2).padStart(6, ' ')}), power: ${r.power.toFixed(2).padStart(7, ' ')}, saturation factor = ${r.saturationFactor.toFixed(2)}`
-    document.getElementById('hud').textContent = hud
-  }
-  renderer.setView(viewpoint.x - 8, viewpoint.x + 8, viewpoint.y - 3, viewpoint.y + 6)
-  renderer.renderWorld()
-  window.requestAnimationFrame(updateScreen)
-}
-updateScreen()
-
 const app = express()
+const version = require('./package.json').version
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -372,3 +337,39 @@ app.post('/api/control/', (req, res) => {
   world.step(1 / 60, 20, 30)
   world.t += 1 / 60
 })
+
+function reset () {
+  robots = new Map()
+  world = new World(Vec2(0, -9.8))
+  world.robots = robots
+  latestRobot = undefined
+  renderer = new Renderer(world, ctx)
+  robotCounter = 0
+  viewpoint = Vec2(0, 0)
+  populateWorld(world, version, server.address().port)
+}
+
+reset()
+
+function updateScreen () {
+  if (latestRobot) {
+    const pos = latestRobot.body.getPosition()
+    if (Math.abs(viewpoint.x - pos.x) > 2) {
+      viewpoint.x = viewpoint.x > pos.x ? pos.x + 2 : pos.x - 2
+    }
+    if (Math.abs(viewpoint.y - pos.y) > 1) {
+      viewpoint.y = viewpoint.y > pos.y ? pos.y + 1 : pos.y - 1
+    }
+    const r = latestRobot
+    const b = r.body.getPosition(); const ba = r.body.getAngle()
+    const w = Vec2.sub(r.wheel.getPosition(), b); const wa = r.wheel.getAngle()
+    const hud = `
+body: (${b.x.toFixed(2).padStart(5, ' ')}, ${b.y.toFixed(2).padStart(5, ' ')}, ${ba.toFixed(2).padStart(5, ' ')}), wheel: (${w.x.toFixed(2).padStart(5, ' ')}, ${w.y.toFixed(2).padStart(5, ' ')}, ${wa.toFixed(2).padStart(5, ' ')}), numLandContacts = ${r.numLandContacts}
+torque: (${r.torque[0].toFixed(2).padStart(6, ' ')}, ${r.torque[1].toFixed(2).padStart(6, ' ')}, ${r.torque[2].toFixed(2).padStart(6, ' ')}), power: ${r.power.toFixed(2).padStart(7, ' ')}, saturation factor = ${r.saturationFactor.toFixed(2)}`
+    document.getElementById('hud').textContent = hud
+  }
+  renderer.setView(viewpoint.x - 8, viewpoint.x + 8, viewpoint.y - 3, viewpoint.y + 6)
+  renderer.renderWorld()
+  window.requestAnimationFrame(updateScreen)
+}
+updateScreen()
