@@ -2,8 +2,11 @@
   "name": "invpendrace",
   "version": "0.1.2",
   "description": "inverted pendulum simulator for newbie",
-  "private": true,
   "main": "main.js",
+  "repository":{
+    "type": "git",
+    "url": "https://github.com/maruta/invpendrace.git"
+  },
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",

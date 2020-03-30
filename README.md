@@ -18,7 +18,7 @@ dist/ 配下のバイナリを実行する．
 ### ソースコードと必要なパッケージの取得
 
 ``` sh
-git clone git@github.com:maruta/invpendrace.git
+git clone https://github.com/maruta/invpendrace.git
 cd invpendrace
 npm install
 ```
