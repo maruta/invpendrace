@@ -12,13 +12,13 @@ dist/ 配下のバイナリを実行する．
 ## シミュレータを開発したいとき
 
 ### 必要なもの
-* node.js
+* [node.js](https://nodejs.org/ja/)
 * git
 
 ### ソースコードと必要なパッケージの取得
 
 ``` sh
-git clone https://github.com/maruta/invpendrace.git
+git clone git@github.com:maruta/invpendrace.git
 cd invpendrace
 npm install
 ```
@@ -31,6 +31,8 @@ npm run start
 
 デバッグ用の Developer Tool がドックインされていて画面が狭いので
 別ウィンドウに出した方が良い．
+
+制御器からの指令があるまではロボットは出現せず時間も進行しない．
 
 ### ファイル構成
 
