@@ -84,7 +84,7 @@ class Renderer {
     for (const [, s] of this.world.images) {
       ctx.save()
       ctx.translate(s.x, s.y)
-      ctx.scale(1 / s.scale, -1 / s.scale)
+      ctx.scale(1 / s.scale * 128 / options.scale, -1 / s.scale  *  128 / options.scale)
       ctx.drawImage(s.image, 0, 0)
       ctx.restore()
     }

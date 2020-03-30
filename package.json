@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "description": "inverted pendulum simulator for newbie",
   "main": "main.js",
-  "repository":{
+  "repository": {
     "type": "git",
     "url": "https://github.com/maruta/invpendrace.git"
   },
