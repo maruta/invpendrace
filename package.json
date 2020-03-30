@@ -1,6 +1,6 @@
 {
   "name": "invpendrace",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "inverted pendulum simulator for newbie",
   "main": "main.js",
   "repository": {
