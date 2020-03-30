@@ -84,7 +84,7 @@ npm run start
 
 ## ロボットのモデル
 
-[doc/model.pptx](doc/model.pptx) を参照のこと．
+[doc/model.pdf](doc/model.pdf) を参照のこと．
 
 ## ライセンス
 
