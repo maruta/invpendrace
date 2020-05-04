@@ -178,7 +178,7 @@ listening on port ${port}
       // 1 天井とでこぼこ道
       SF.addFloor(5, 0)
       const width = 10
-      const height = 2
+      const height = 1.2
       const ceil = world.createBody(Vec2(SF.x + width / 2, SF.y + height + 10 / 2))
       ceil.createFixture(Box(width / 2, 10 / 2))
 
@@ -194,7 +194,7 @@ listening on port ${port}
     {
       // 2 ジャンプ台とベルトコンベア
       const height = 0.5
-      const width = 10
+      const width = 9
       const speed = -10
       SF.addFloor(5, 0)
 
@@ -227,8 +227,8 @@ listening on port ${port}
       // 3 時限障害物
       SF.addFloor(10, 0)
       const width = 10
-      const height = 2
-      const speed = -1.5
+      const height = 1.3
+      const speed = -0.1
 
       const platform = world.createKinematicBody(Vec2(SF.x + width / 2, SF.y + height / 2))
       platform.createFixture(Box(width / 2, height / 2))
@@ -246,8 +246,8 @@ listening on port ${port}
       // 4 エレベーター
       SF.addFloor(5, 0)
 
-      const width = 2
-      const height = 2
+      const width = 4
+      const height = 18
       const thickness = 0.1
       const ratio = 1
       const platform = world.createKinematicBody(Vec2(SF.x + width / 2, SF.y - thickness / 2))
