@@ -11,7 +11,7 @@ A = [zeros(4),eye(4);
     zeros(3,8);
     zeros(1,7),-4*mb*g/(Iw+r^2*mw)];
 
-h = 1;
+h = 1.2;
 
 B = [zeros(4,3);
     diag([1/mb,1/mb,1/Ib]);
@@ -94,12 +94,12 @@ while true
                 jumped_1 = true;
                 tj = t;
             end
-            if x(1) > 82.5 && jumped_2 == false
+            if x(1) > 92.5 && jumped_2 == false
                 mode = "jump";
                 jumped_2 = true;
                 tj = t;
             end
-            if x(1) > 165
+            if x(1) > 242
                 mode = "end";
                 te = t;
             end
@@ -112,7 +112,6 @@ while true
                 mode = "exit";
             end
     end
-    
     
     % 制御則
     
@@ -163,7 +162,7 @@ while true
     % シミュレータ時間が実時間と同じペースで経過するように待つ
     % 待たなければリアリティは失われるが実験は速く終わる
     rdt = toc;
-    if rdt<dt
+    if rdt<dt && state.body.position.x > 170
         pause(dt-rdt)
     end
     

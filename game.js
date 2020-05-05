@@ -164,7 +164,7 @@ const spawnRobot = (world, id, p, params = {}) => {
     if (targetUserData && targetUserData.type === 'floor') {
       if (robotUserData && robotUserData.part === 'wheel') { // Landed
         robot.numLandContacts++
-      } else { // Fall
+      } else if (robotUserData && robotUserData.part === 'body') { // Fall
         robot.achievements.fall.push({ p: c })
       }
       robot.memory.peak = null
