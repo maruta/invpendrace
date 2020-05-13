@@ -60,6 +60,10 @@ classdef robotsim
         function res = screenshot(obj)
             res = webread([obj.baseurl,'screenshot']);
         end
+        
+        function res = getfloor(obj)
+            res = webread([obj.baseurl,'getfloor']);
+        end
     end
 end
 

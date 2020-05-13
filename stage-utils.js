@@ -9,10 +9,13 @@ class StageFactory {
     world.texts = new Map()
     world.images = new Map()
     world.queue = []
+    world.floor = []
+
     this.move = (dx, dy) => {
       this.x += dx
       this.y += dy
     }
+
     this.beginFloor = () => {
       this.floor = world.createBody()
       this.floor.setUserData({ type: 'floor' })
@@ -22,6 +25,7 @@ class StageFactory {
     }
     this.endFloor = () => {
       this.floor.createFixture(Chain(this.floorVTXs, false))
+      world.floor.push(this.floorVTXs)
     }
     this.addFloor = (dx, dy) => {
       this.x += dx

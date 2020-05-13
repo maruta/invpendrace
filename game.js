@@ -246,6 +246,10 @@ app.get('/api/screenshot/', (req, res) => {
   })
 })
 
+app.get('/api/getfloor/', (req, res) => {
+  res.json(world.floor)
+})
+
 app.post('/api/control/', (req, res) => {
   const robot = robots[req.body.id]
   const u = req.body.u

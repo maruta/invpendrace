@@ -32,6 +32,19 @@ rs = robotsim('http://localhost:8933/api/');
 
 rs.reset()
 
+% 床の情報を取得&可視化
+floors = rs.getfloor();
+figure(101)
+clf
+for k = 1:numel(floors) % 床は複数に分かれている
+   fx = [floors{k}.x]; % 床の頂点のx座標の列
+   fy = [floors{k}.y]; % 床の頂点のy座標の列
+   plot(fx,fy, 'LineWidth',2) 
+   hold on
+end
+axis equal
+drawnow
+
 p0 = [0,2];
 
 id = rs.spawn(p0); % ロボットの出現位置は変えられる
@@ -162,7 +175,7 @@ while true
     % シミュレータ時間が実時間と同じペースで経過するように待つ
     % 待たなければリアリティは失われるが実験は速く終わる
     rdt = toc;
-    if rdt<dt && state.body.position.x > 170
+    if rdt<dt
         pause(dt-rdt)
     end
     
