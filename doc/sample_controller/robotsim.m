@@ -4,6 +4,8 @@ classdef robotsim
     
     properties
         baseurl
+        floors
+        floorGrid
     end
     
     methods
@@ -12,12 +14,36 @@ classdef robotsim
             %   baseurlに接続先のシミュレータの基底URLを指定する．
             %   他のPCのシミュレータにも接続できるはず
             obj.baseurl = baseurl;
+            
+            obj.floors = obj.getfloor();
+            fx = [];
+            fy = [];
+            for k = 1:numel(obj.floors) % 床は複数に分かれている
+               fx = [fx, obj.floors{k}.x]; % 床の頂点のx座標の列
+               fy = [fy, obj.floors{k}.y]; % 床の頂点のy座標の列
+            end
+            
+            for k=2:numel(fx)
+                if fx(k-1)==fx(k)
+                    fx(k) = fx(k)+1e-6;
+                end
+            end
+            fx
+            fy
+            obj.floorGrid = griddedInterpolant(fx,fy);
         end
-        function [] = reset(obj)
+        
+        function obj = reset(obj)
             %RESET シミュレータをリセットする．
             %   世界と全てのロボットを削除し，新たな世界を生成する
             py.requests.post([obj.baseurl,'reset'],pyargs('data',{}));
+ 
         end
+        
+        function y = getFloorY(obj, x)
+            y = obj.floorGrid(x);
+        end
+        
         function id = spawn(obj, p)
             %SPAWN ロボットを新たに生成する
             %   生成されたロボット識別するためのIDを返す

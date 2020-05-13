@@ -33,15 +33,9 @@ rs = robotsim('http://localhost:8933/api/');
 rs.reset()
 
 % 床の情報を取得&可視化
-floors = rs.getfloor();
 figure(101)
-clf
-for k = 1:numel(floors) % 床は複数に分かれている
-   fx = [floors{k}.x]; % 床の頂点のx座標の列
-   fy = [floors{k}.y]; % 床の頂点のy座標の列
-   plot(fx,fy, 'LineWidth',2) 
-   hold on
-end
+xf = -10:0.01:255;
+plot(xf, rs.getFloorY(xf))
 axis equal
 drawnow
 
