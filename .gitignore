@@ -5,3 +5,5 @@ doc/*/*.mp4
 .DS_Store
 .vscode/
 *.asv
+mycontroller/
+
