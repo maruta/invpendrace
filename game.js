@@ -209,6 +209,7 @@ let latestRobot
 let robots
 let robotCounter
 let viewpoint
+let cameraMode
 
 const app = express()
 const version = require('./package.json').version
@@ -235,6 +236,18 @@ app.post('/api/spawn/', (req, res) => {
   latestRobot = robot
   res.json({ id: robot.id })
 })
+
+app.post('/api/camera/', (req, res) => {
+  let p = Vec2(0, 2)
+  if (req.body.mode == 'auto') {
+    cameraMode='auto'
+  }else{
+    cameraMode='manual'
+    viewpoint = Vec2(parseFloat(req.body.p[0]), parseFloat(req.body.p[1]))
+  }
+  res.json(viewpoint)  
+})
+
 
 app.get('/api/screenshot/', (req, res) => {
   renderer.renderWorld()
@@ -350,6 +363,7 @@ function reset () {
   renderer = new Renderer(world, ctx)
   robotCounter = 0
   viewpoint = Vec2(0, 0)
+  cameraMode = 'auto'
   populateWorld(world, version, server.address().port)
 }
 
@@ -358,11 +372,13 @@ reset()
 function updateScreen () {
   if (latestRobot) {
     const pos = latestRobot.body.getPosition()
-    if (Math.abs(viewpoint.x - pos.x) > 2) {
-      viewpoint.x = viewpoint.x > pos.x ? pos.x + 2 : pos.x - 2
-    }
-    if (Math.abs(viewpoint.y - pos.y) > 1) {
-      viewpoint.y = viewpoint.y > pos.y ? pos.y + 1 : pos.y - 1
+    if(cameraMode=='auto'){
+      if (Math.abs(viewpoint.x - pos.x) > 2) {
+        viewpoint.x = viewpoint.x > pos.x ? pos.x + 2 : pos.x - 2
+      }
+      if (Math.abs(viewpoint.y - pos.y) > 1) {
+        viewpoint.y = viewpoint.y > pos.y ? pos.y + 1 : pos.y - 1
+      }  
     }
     const r = latestRobot
     const b = r.body.getPosition(); const ba = r.body.getAngle()
