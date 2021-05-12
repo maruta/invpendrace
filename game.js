@@ -1,10 +1,10 @@
 'use strict'
 
-const { World, Vec2, Circle, Box, RevoluteJoint } = require('planck-js')
-const Renderer = require('./renderer')
-const populateWorld = require('./stage')
-const express = require('express')
-const bodyParser = require('body-parser')
+const { World, Vec2, Circle, Box, RevoluteJoint } = window.require('planck-js')
+const Renderer = window.require('./renderer')
+const populateWorld = window.require('./stage')
+const express = window.require('express')
+const bodyParser = window.require('body-parser')
 const canvas = document.querySelector('#screen')
 const ctx = canvas.getContext('2d')
 function resize () {

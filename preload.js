@@ -1,0 +1,2 @@
+window.require = require;
+

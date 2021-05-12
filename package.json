@@ -19,15 +19,15 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "electron": "^9.4.0",
-    "minimist": "^1.2.5",
-    "electron-builder": "^22.4.1",
+    "electron": "^12.0.7",
+    "electron-builder": "^22.11.3",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "minimist": "^1.2.5"
   },
   "build": {
     "appId": "net.marutank.invpendrace",
